@@ -141,14 +141,14 @@
                                         <span class="new">{{prod.condition}}</span>
                                     </span>
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="/singleproduct/{{prod.id}}" class="image">
                                             <img src="http://localhost:8000/media/{{prod.image}}" alt="Product" />
                                             <img class="hover-image" src="http://localhost:8000/media/{{prod.image}}" alt="Product" />
                                         </a>
                                     </div>
                                     <div class="content">
                                         <span class="category"><a href="#">{{prod.categories}}</a></span>
-                                        <h5 class="title"><a href="single-product.html">{{prod.name|truncatewords:10}}
+                                        <h5 class="title"><a href="/singleproduct/{{prod.id}}">{{prod.name|truncatewords:10}}
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -156,11 +156,11 @@
                                         </span>
                                     </div>
                                     <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart-{{forloop.counter}}"><i
                                             class="pe-7s-shopbag"></i></button>
                                         <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                 class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal-{{forloop.counter}}"><i class="pe-7s-look"></i></button>
                                         <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
                                                 class="pe-7s-refresh-2"></i></button>
                                     </div>

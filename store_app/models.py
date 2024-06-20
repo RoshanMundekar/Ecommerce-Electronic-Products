@@ -1,10 +1,11 @@
 
 
+import datetime
 from random import choice
 from django.utils import timezone
 from django.db import models
-
-
+from ckeditor .fields import RichTextField
+from django.contrib.auth.models import User
 
 
 class Categories(models.Model):
@@ -50,8 +51,8 @@ class Product(models.Model):
     price = models.IntegerField()    
     condition = models.CharField(choices= CONDITION ,max_length=100)    
     name = models.CharField(max_length=200)    
-    Information = models.CharField(max_length=2048) 
-    description = models.TextField() 
+    Information = RichTextField(null=True)
+    description = RichTextField(null=True) 
     stock = models.CharField(choices= STOCK ,max_length=200)    
     status = models.CharField(choices= STATUS ,max_length=200)  
     created_date=models.DateTimeField(default=timezone.now)
@@ -83,3 +84,51 @@ class Tag(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    
+class Contact_us(models.Model):
+    name=models.CharField(max_length=200)
+    email=models.EmailField(max_length=200)
+    subject=models.CharField(max_length=300)
+    message=models.TextField()
+    date=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.email
+    
+    
+    
+class Order(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    firstname=models.CharField(max_length=200)
+    lastname=models.CharField(max_length=200)
+    country=models.CharField(max_length=200)
+    address=models.TextField()
+    city=models.CharField(max_length=200)
+    state=models.CharField(max_length=200)
+    postcode=models.IntegerField()
+    phone=models.IntegerField()
+    email=models.EmailField(max_length=200)
+    additional_info=models.TextField()
+    amount=models.CharField(max_length=100)
+    payment_id=models.CharField(max_length=300,null=True,blank=True)
+    paid=models.BooleanField(default=False,null=True)
+    date=models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.user.username
+    
+class Orderitem (models.Model):
+    Order=models.ForeignKey(Order,on_delete=models.CASCADE)
+    prduct=models.CharField(max_length=200)
+    image=models.ImageField(upload_to="Product_images/Order_Img")
+    quantity=models.CharField(max_length=20)
+    price=models.CharField(max_length=50)
+    total=models.CharField(max_length=1000)
+    
+    def __str__(self):
+        return self.Order.user.username
+    
+       
+    
+       
+        

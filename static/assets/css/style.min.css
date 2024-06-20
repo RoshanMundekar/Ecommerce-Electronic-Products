@@ -5137,7 +5137,7 @@ only screen and (max-width:479px) {
 }
 
 .breadcrumb-area {
-    background-image: url(../images/about/breadcrunb-bg.webp);
+    background-image: url(../images/banner/6.webp);
     background-color: #cad5e1;
     background-repeat: no-repeat;
     background-position: center center;
@@ -5627,7 +5627,7 @@ only screen and (max-width:767px) {
 
 .fashion-area .title {
     font-size: 60px;
-    color: #fff;
+    color: #0c0c0c;
     font-weight: 700;
     line-height: 74px;
     margin-bottom: 45px

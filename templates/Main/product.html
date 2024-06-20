@@ -51,52 +51,7 @@
     </div>
 </div>
 <!-- OffCanvas Wishlist End -->
-<!-- OffCanvas Cart Start -->
-<div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-    <div class="inner">
-        <div class="head">
-            <span class="title">Cart</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-        <div class="body customScroll">
-            <ul class="minicart-product-list">
-                <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/1.webp"
-                            alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Modern Smart Phone</a>
-                        <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/2.webp"
-                            alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Bluetooth Headphone</a>
-                        <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/3.webp"
-                            alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Smart Music Box</a>
-                        <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="foot">
-            <div class="buttons mt-30px">
-                <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- OffCanvas Cart End -->
 <!-- OffCanvas Menu Start -->
 <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
@@ -281,12 +236,12 @@
                             <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">Default <i
                                     class="fa fa-angle-down"></i></button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a class="dropdown-item" href="#">Name, A to Z</a></li>
-                                <li><a class="dropdown-item" href="#">Name, Z to A</a></li>
-                                <li><a class="dropdown-item" href="#">Price, low to high</a></li>
-                                <li><a class="dropdown-item" href="#">Price, high to low</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By new</a></li>
-                                <li><a class="dropdown-item" href="#">Sort By old</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?ATOZ={{i.id}} {% endfor %}">Name, A to Z</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?ZTOA={{i.id}} {% endfor %}">Name, Z to A</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?PRICELTH={{i.id}} {% endfor %}">Price, low to high</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?PRICEHTL={{i.id}} {% endfor %}">Price, high to low</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?NEW={{i.id}} {% endfor %}">Sort By new</a></li>
+                                <li><a class="dropdown-item" href="/product/{% for i in product %}?OLD={{i.id}} {% endfor %}">Sort By old</a></li>
                             </ul>
                         </div>
                         <!-- Single Wedge Start -->
@@ -331,7 +286,7 @@
                                                 </div>
                                                 <div class="actions">
                                                     <button title="Add To Cart" class="action add-to-cart"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal-Cart-{{forloop.counter}}"><i
                                                             class="pe-7s-shopbag"></i></button>
                                                     <button class="action wishlist" title="Wishlist"
                                                         data-bs-toggle="modal"
@@ -389,7 +344,7 @@
                                                         <div class="actions">
                                                             <button title="Add To Cart" class="action add-to-cart"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModal-Cart"><i
+                                                                data-bs-target="#exampleModal-Cart-{{forloop.counter}}"><i
                                                                     class="pe-7s-shopbag"></i></button>
                                                             <button class="action wishlist" title="Wishlist"
                                                                 data-bs-toggle="modal"
@@ -454,10 +409,10 @@
                         <h4 class="sidebar-title">Top Categories</h4>
                         <div class="sidebar-widget-category">
                             <ul>
-                                <li><a href="#" class="selected m-0"> All</a></li>
+                                <li><a href="/product/" class="selected m-0"> All Products</a></li>
 
                                 {% for cat in categories%}
-                                <li><a href="#" class=""> {{cat.name}} </a></li>
+                                <li><a href="/product/?categories={{cat.id}}" class=""> {{cat.name}} </a></li>
                                 {% endfor%}
                                
                             </ul>
@@ -469,7 +424,7 @@
                         <div class="price-filter">
                             <div class="price-slider-amount">
                                 {% for f_price in filter_price%}
-                                <li><a href="#" class=""> {{f_price.price}} </a></li>
+                                <li><a href="/product/?filtter_price={{f_price.id}}" class=""> {{f_price.price}} </a></li>
                                 {% endfor%}
                                
                             </div>
@@ -495,7 +450,7 @@
                         <div class="sidebar-widget-brand">
                             <ul>
                                 {% for i in brand1%}
-                                <li><a href="#" class="selected m-0"> {{i.name}}</span> </a></li>
+                                <li><a href="/product/?brand={{i.id}}" class="selected m-0"> {{i.name}}</span> </a></li>
                                 {% endfor%}
                             </ul>
                         </div>
@@ -506,121 +461,6 @@
         </div>
     </div>
 </div>
-<!-- Shop Page End  -->
-<!-- Footer Area Start -->
-<div class="footer-area">
-    <div class="footer-container">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
-                        <div class="single-wedge">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>
-                            </div>
-                            <p class="about-text">Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ
-                                incididunt ut labore
-                            </p>
-                            <ul class="link-follow">
-                                <li>
-                                    <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-tumblr" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i
-                                            class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-60px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Services</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a></li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="cart.html">Shopping cart</a></li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-40px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">My Account</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a></li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="cart.html">Shopping cart</a></li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a>
-                                        </li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-12">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Contact Info</h4>
-                            <div class="footer-links">
-                                <!-- News letter area -->
-                                <p class="address">Address: Your Address Goes Here.</p>
-                                <p class="phone">Phone/Fax:<a href="tel:0123456789"> 0123456789</a></p>
-                                <p class="mail">Email:<a href="mailto:demo@example.com"> demo@example.com</a></p>
-                                <p class="mail"><a href="https://demo@example.com/"> demo@example.com</a></p>
-                                <!-- News letter area  End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="line-shape-top line-height-1">
-                    <div class="row flex-md-row-reverse align-items-center">
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="payment-mth"><a href="#"><img class="img img-fluid"
-                                        src="../static/assets/images/icons/payment.png" alt="payment-image"></a></div>
-                        </div>
-                        <div class="col-md-6 text-center text-md-start">
-                            <p class="copy-text"> © 2021 <strong>Hmart</strong> Made With <i class="fa fa-heart"
-                                    aria-hidden="true"></i> By <a class="company-name"
-                                    href="https://themeforest.net/user/codecarnival/portfolio">
-                                    <strong> Codecarnival </strong></a>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 {% endblock %}
